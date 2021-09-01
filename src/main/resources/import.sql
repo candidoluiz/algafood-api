@@ -7,6 +7,7 @@ insert into forma_pagamento(descricao) values ('Cartão');
 insert into permissao(nome, descricao) values ('Inserir','Permite inserir dados no banco de dados');
 
 insert into estado(nome) values ('São Paulo');
+insert into estado(nome) values ('Minas Gerais');
 
 insert into cidade (nome, estado_id) values ('Birigui', 1);
 
