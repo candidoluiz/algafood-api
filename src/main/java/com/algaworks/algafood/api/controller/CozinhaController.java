@@ -38,14 +38,11 @@ public class CozinhaController {
     public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId){
         Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
         //return ResponseEntity.status(HttpStatus.OK).body(cozinha);
-        //return ResponseEntity.ok(cozinha);
+        if (cozinha != null){
+            return ResponseEntity.ok(cozinha);
+        }
+        return ResponseEntity.notFound().build();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.LOCATION, "http://localhost:8080/cozinhas");
 
-        return ResponseEntity
-                .status(HttpStatus.FOUND)
-                .headers(headers)
-                .build();
     }
 }
