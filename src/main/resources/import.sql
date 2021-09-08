@@ -10,6 +10,10 @@ insert into estado(nome) values ('São Paulo');
 insert into estado(nome) values ('Minas Gerais');
 
 insert into cidade (nome, estado_id) values ('Birigui', 1);
+insert into cidade (nome, estado_id) values ('Araçatuba', 1);
+insert into cidade (nome, estado_id) values ('Coroados', 1);
+
+
 
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Lagurmet',5.00, 1);
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Olivier',3.99, 1);
