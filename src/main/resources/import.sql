@@ -16,7 +16,7 @@ insert into cidade (nome, estado_id) values ('Coroados', 1);
 
 
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Thai Gurmet',10.00, 1);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Thai Delivery',9.50, 1);
+insert into restaurante (nome, taxa_frete, cozinha_id) values ('Thai Delivery',0.00, 1);
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Olivier',3.99, 1);
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Tuk Tuk Comida Indiana',15.99, 2);
 

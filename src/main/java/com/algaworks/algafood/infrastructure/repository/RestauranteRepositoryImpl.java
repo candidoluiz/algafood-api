@@ -30,7 +30,7 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
         CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
         Root<Restaurante> root = criteria.from(Restaurante.class);
 
-        List<Predicate> predicates = new ArrayList<Predicate>();
+        List<Predicate> predicates = new ArrayList();
 
         if (StringUtils.hasText(nome)){
             predicates.add(builder.like(builder.upper(root.get("nome")), "%" + nome.toUpperCase() + "%"));
