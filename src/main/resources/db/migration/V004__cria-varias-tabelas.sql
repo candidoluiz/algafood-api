@@ -18,32 +18,32 @@
 
     create table permissao (
        id  bigserial not null,
-        descricao varchar(60) not null,
         nome varchar(100) not null,
+        descricao varchar(60) not null,
         primary key (id)
     );
 
     create table produto (
-       id  bigserial not null,
-        ativo boolean not null,
-        descricao text not null,
+        id  bigserial not null,
         nome varchar(80) not null,
+        descricao text not null,
         preco numeric(10, 2) not null,
+        ativo boolean not null,
         restaurante_id bigint  not null,
         primary key (id)
     );
 
     create table restaurante (
-       id  bigserial not null,
-        data_atualizacao timestamp(0) not null,
+        id  bigserial not null,
+        nome varchar(80) not null,
+        taxa_frete numeric(10, 2) not null,
         data_cadastro timestamp(0) not null,
+        data_atualizacao timestamp(0) not null,
         endereco_bairro varchar(60),
         endereco_cep varchar(9),
         endereco_complemento varchar(60),
         endereco_logradouro varchar(100),
         endereco_numero varchar(20),
-        nome varchar(80) not null,
-        taxa_frete numeric(10, 2) not null,
         cozinha_id bigint  not null,
         endereco_cidade_id bigint ,
         primary key (id)
@@ -56,10 +56,10 @@
 
     create table usuario (
        id  bigserial not null,
-        data_cadastro timestamp(0) not null,
-        email varchar(255) not null,
         nome varchar(80) not null,
         senha varchar(255) not null,
+        email varchar(255) not null,
+        data_cadastro timestamp(0) not null,
         primary key (id)
     );
 
