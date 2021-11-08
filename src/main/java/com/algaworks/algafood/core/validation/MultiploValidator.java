@@ -4,6 +4,10 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.math.BigDecimal;
 
+/**
+ * Aula 9.16
+ */
+
 public class MultiploValidator implements ConstraintValidator<Multiplo, Number> {
 
     private int numeroMultiplo;
