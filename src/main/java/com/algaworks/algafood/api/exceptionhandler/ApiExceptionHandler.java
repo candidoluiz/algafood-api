@@ -1,5 +1,6 @@
 package com.algaworks.algafood.api.exceptionhandler;
 
+import com.algaworks.algafood.core.validation.ValidacaoException;
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
@@ -40,10 +41,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ProblemType problemType = ProblemType.DADOS_INVALIDOS;
-        String detail = String.format("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente");
+        return handleValidationInternal(ex, ex.getBindingResult(), headers, status, request);
 
-        BindingResult bindingResult = ex.getBindingResult();
+    }
+
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity<Object> handleValidacaoException(ValidacaoException ex, WebRequest request){
+        return handleValidationInternal(ex, ex.getBindingResult(), new HttpHeaders(),
+                HttpStatus.BAD_REQUEST, request);
+
+    }
+
+    private ResponseEntity<Object> handleValidationInternal(Exception ex, BindingResult bindingResult, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+        ProblemType problemType = ProblemType.DADOS_INVALIDOS;
+        String detail = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.";
 
         List<Problem.Object> problemObjects = bindingResult.getAllErrors().stream()
                 .map(objectError -> {
@@ -51,14 +63,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
                     String name = objectError.getObjectName();
 
-                    if(objectError instanceof FieldError){
-                        name = ((FieldError)objectError).getField();
+                    if (objectError instanceof FieldError) {
+                        name = ((FieldError) objectError).getField();
                     }
 
                     return Problem.Object.builder()
-                    .name(name)
-                    .userMessage(message)
-                    .build();
+                            .name(name)
+                            .userMessage(message)
+                            .build();
                 })
                 .collect(Collectors.toList());
 
@@ -66,8 +78,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .userMessage(detail)
                 .objects(problemObjects)
                 .build();
-        return handleExceptionInternal(ex, problem, headers, status, request);
 
+        return handleExceptionInternal(ex, problem, headers, status, request);
     }
 
     @ExceptionHandler(Exception.class)
