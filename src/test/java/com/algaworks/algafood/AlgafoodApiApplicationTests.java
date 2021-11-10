@@ -1,5 +1,7 @@
 package com.algaworks.algafood;
 
+import com.algaworks.algafood.domain.exception.CozinhaNaoEncontradaException;
+import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
 import org.junit.jupiter.api.Assertions;
@@ -48,6 +50,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
         assertThat(erroEsperado).isNotNull();
 
+    }
+
+    @Test()
+    public void deveFalhar_QuandoExcluirCozinhaEmUso() {
+
+        EntidadeEmUsoException erroEsperado =  Assertions.assertThrows(EntidadeEmUsoException.class, () ->{
+            cadastroCozinha.excluir(1L);
+        });
+        assertThat(erroEsperado).isNotNull();
+    }
+
+    @Test
+    public void deveFalhar_QuandoExcluirCozinhaInexistente() {
+
+        CozinhaNaoEncontradaException erroEsperado =
+                Assertions.assertThrows(CozinhaNaoEncontradaException.class, () -> {
+                    cadastroCozinha.excluir(100L);
+                });
+
+        assertThat(erroEsperado).isNotNull();
     }
 
 }
