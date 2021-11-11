@@ -1,5 +1,8 @@
 package com.algaworks.algafood;
 
+import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.domain.repository.CozinhaRepository;
+import com.algaworks.algafood.util.DatabaseCleaner;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.flywaydb.core.Flyway;
@@ -25,13 +28,19 @@ public class CadastroCozinhaIT {
     @Autowired
     private Flyway flyway;
 
+    @Autowired
+    private DatabaseCleaner databaseCleaner;
+
+    @Autowired
+    private CozinhaRepository cozinhaRepository;
+
     @BeforeEach
     public void setup(){
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         RestAssured.port = port;
         RestAssured.basePath = "/cozinhas";
-
-        flyway.migrate();
+        databaseCleaner.clearTables();
+        prepararDados();
     }
 
     @Test
@@ -46,19 +55,19 @@ public class CadastroCozinhaIT {
     }
 
     @Test
-    public void deveConter4Cozinhas_QuandoConsultarCozinhas() {
+    public void deveConter2Cozinhas_QuandoConsultarCozinhas() {
 
         RestAssured.given()
                 .accept(ContentType.JSON)
                 .when()
                 .get()
                 .then()
-                .body("", Matchers.hasSize(4));
+                .body("", Matchers.hasSize(2));
 //			.body("nome", hasItems("Indiana", "Tailandesa"));
     }
 
     @Test
-    public void testRetornarStatus201_QuandoCadastrarCozinha() {
+    public void deveRetornarStatus201_QuandoCadastrarCozinha() {
         RestAssured.given()
                 .body("{ \"nome\": \"Chinesa\" }")
                 .contentType(ContentType.JSON)
@@ -67,5 +76,16 @@ public class CadastroCozinhaIT {
                 .post()
                 .then()
                 .statusCode(HttpStatus.CREATED.value());
+    }
+
+
+    private void prepararDados(){
+        Cozinha cozinha = new Cozinha();
+        cozinha.setNome("Tailandesa");
+        cozinhaRepository.save(cozinha);
+
+        Cozinha cozinha2 = new Cozinha();
+        cozinha2.setNome("Americana");
+        cozinhaRepository.save(cozinha2);
     }
 }
