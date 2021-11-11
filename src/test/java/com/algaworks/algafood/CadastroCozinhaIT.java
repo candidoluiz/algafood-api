@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+//TODO implementar o teste de restaurante da aula 10.17
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("/application-test.properties")
@@ -108,7 +110,6 @@ public class CadastroCozinhaIT {
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value());
     }
-
 
     private void prepararDados(){
         Cozinha cozinhaTailandesa = new Cozinha();
