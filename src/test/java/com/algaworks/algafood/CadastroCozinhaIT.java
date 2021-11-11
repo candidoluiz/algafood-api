@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -45,5 +46,17 @@ public class CadastroCozinhaIT {
                 .then()
                 .body("", hasSize(4));
 //			.body("nome", hasItems("Indiana", "Tailandesa"));
+    }
+
+    @Test
+    public void testRetornarStatus201_QuandoCadastrarCozinha() {
+        RestAssured.given()
+                .body("{ \"nome\": \"Chinesa\" }")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .when()
+                .post()
+                .then()
+                .statusCode(HttpStatus.CREATED.value());
     }
 }
