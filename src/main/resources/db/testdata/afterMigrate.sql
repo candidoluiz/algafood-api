@@ -55,13 +55,13 @@ insert into cidade (nome, estado_id) values ('Fortaleza', 3);
 
 
 
-insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro) values ('Thai Gourmet', 10, 1, timezone('utc', now()), timezone('utc', now()), 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro');
-insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) values ('Thai Delivery',0.00, 1, timezone('utc', now()),timezone('utc', now()));
-insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) values ('Olivier',3.99, 1, timezone('utc', now()), timezone('utc', now()));
-insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) values ('Tuk Tuk Comida Indiana',15.99, 2, timezone('utc', now()), timezone('utc', now()));
-insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) values ('Java Steakhouse',12.3, 3, timezone('utc', now()), timezone('utc', now()));
-insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) values ('Lanchonete do Tio Sam',11.4, 4, timezone('utc', now()), timezone('utc', now()));
-insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) values ('Bar da Maria',6, 4, timezone('utc', now()), timezone('utc', now()));
+insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro) values ('Thai Gourmet', 10, 1, timezone('utc', now()), timezone('utc', now()), true, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro');
+insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values ('Thai Delivery',0.00, 1, timezone('utc', now()),timezone('utc', now()), true);
+insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values ('Olivier',3.99, 1, timezone('utc', now()), timezone('utc', now()), true);
+insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values ('Tuk Tuk Comida Indiana',15.99, 2, timezone('utc', now()), timezone('utc', now()), true);
+insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values ('Java Steakhouse',12.3, 3, timezone('utc', now()), timezone('utc', now()), true);
+insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values ('Lanchonete do Tio Sam',11.4, 4, timezone('utc', now()), timezone('utc', now()), true);
+insert into restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values ('Bar da Maria',6, 4, timezone('utc', now()), timezone('utc', now()), true);
 
 insert into forma_pagamento(descricao) values ('Cartão de crédito');
 insert into forma_pagamento(descricao) values ('Cartão de débito');
