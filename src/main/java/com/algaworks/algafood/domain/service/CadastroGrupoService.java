@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CadastroGrupoService {
 
-    public static final String MSG_ESTADO_EM_USO = "Grupo de código %d não pode ser removido, pois está em uso";
+    public static final String MSG_GRUPO_EM_USO = "Grupo de código %d não pode ser removido, pois está em uso";
 
     @Autowired
     private GrupoRepository grupoRepository;
@@ -34,7 +34,7 @@ public class CadastroGrupoService {
 
         }catch (DataIntegrityViolationException e){
             throw new EntidadeEmUsoException(
-            String.format(MSG_ESTADO_EM_USO, grupoId));
+            String.format(MSG_GRUPO_EM_USO, grupoId));
         }
     }
 
