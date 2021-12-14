@@ -13,7 +13,8 @@
 
     create table grupo_permissao (
        grupo_id bigint  not null,
-        permissao_id bigint  not null
+        permissao_id bigint  not null,
+        primary key (grupo_id, permissao_id)
     );
 
     create table permissao (
@@ -51,7 +52,8 @@
 
     create table restaurante_forma_pagamento (
        restaurante_id bigint  not null,
-        forma_pagamento_id bigint  not null
+        forma_pagamento_id bigint  not null,
+        primary key (restaurante_id, forma_pagamento_id)
     );
 
     create table usuario (
@@ -65,7 +67,8 @@
 
     create table usuario_grupo (
        usuario_id bigint  not null,
-        grupo_id bigint  not null
+        grupo_id bigint  not null,
+        primary key (usuario_id, grupo_id)
     );
 
 
