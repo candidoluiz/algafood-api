@@ -1,12 +1,11 @@
 package com.algaworks.algafood.domain.model;
 
-import com.algaworks.algafood.core.validation.ValorZeroIncluiDescricao;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
-import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@ValorZeroIncluiDescricao(valorField = "taxaFrete", descricaoField = "nome", descricaoObrigatoria="Frete Grátis")
+//@ValorZeroIncluiDescricao(valorField = "taxaFrete", descricaoField = "nome", descricaoObrigatoria="Frete Grátis")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -28,7 +27,6 @@ public class Restaurante {
     @Column(nullable = false)
     private String nome;
 
-    @PositiveOrZero
     @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
 
@@ -40,6 +38,8 @@ public class Restaurante {
     private Endereco endereco;
 
     private Boolean ativo = Boolean.TRUE;
+
+    private Boolean aberto = Boolean.FALSE;
 
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "timestamp(0)")
@@ -72,5 +72,13 @@ public class Restaurante {
 
     public boolean desassociarFormaPagamento(FormaPagamento formaPagamento){
         return getFormasPagamento().remove(formaPagamento);
+    }
+
+    public void abrir(){
+        setAberto(true);
+    }
+
+    public void fechar(){
+        setAberto(false);
     }
 }
