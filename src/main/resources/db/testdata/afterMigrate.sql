@@ -89,6 +89,11 @@ insert into usuario (nome, email, senha, data_cadastro) values
 ('Maria Joaquina', 'maria.vnd@algafood.com', '123', timezone('utc', now())),
 ('José Souza', 'jose.aux@algafood.com', '123', timezone('utc', now())),
 ('Sebastião Martins', 'sebastiao.cad@algafood.com', '123', timezone('utc', now()));
+
+insert into grupo (nome) values ('Gerente'), ('Vendedor'), ('Secretária'), ('Cadastrador');
+insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 1), (2, 2), (3, 1);
+
+
 --acaba aqui
 
 ALTER TABLE cidade ENABLE TRIGGER ALL;
