@@ -10,6 +10,7 @@ ALTER TABLE restaurante DISABLE TRIGGER ALL;
 ALTER TABLE restaurante_forma_pagamento DISABLE TRIGGER ALL;
 ALTER TABLE usuario DISABLE TRIGGER ALL;
 ALTER TABLE usuario_grupo DISABLE TRIGGER ALL;
+ALTER TABLE restaurante_usuario_responsavel DISABLE TRIGGER ALL;
 
 delete from cidade;
 delete from cozinha;
@@ -23,6 +24,7 @@ delete from restaurante;
 delete from restaurante_forma_pagamento;
 delete from usuario;
 delete from usuario_grupo;
+delete from restaurante_usuario_responsavel;
 
 
 ALTER SEQUENCE cidade_id_seq RESTART WITH 1;
@@ -88,14 +90,15 @@ insert into usuario (nome, email, senha, data_cadastro) values
 ('João da Silva', 'joao.ger@algafood.com', '123', timezone('utc', now())),
 ('Maria Joaquina', 'maria.vnd@algafood.com', '123', timezone('utc', now())),
 ('José Souza', 'jose.aux@algafood.com', '123', timezone('utc', now())),
-('Sebastião Martins', 'sebastiao.cad@algafood.com', '123', timezone('utc', now()));
+('Sebastião Martins', 'sebastiao.cad@algafood.com', '123', timezone('utc', now())),
+('Manoel Lima', 'manoel.loja@gmail.com', '123', timezone('utc', now()));
 
 insert into grupo (nome) values ('Gerente'), ('Vendedor'), ('Secretária'), ('Cadastrador');
 insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 1), (2, 2), (3, 1);
 
 insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
 
-
+insert into restaurante_usuario_responsavel (restaurante_id, usuario_id) values (1, 5), (3, 5);
 
 --acaba aqui
 
@@ -111,3 +114,4 @@ ALTER TABLE restaurante ENABLE TRIGGER ALL;
 ALTER TABLE restaurante_forma_pagamento ENABLE TRIGGER ALL;
 ALTER TABLE usuario ENABLE TRIGGER ALL;
 ALTER TABLE usuario_grupo ENABLE TRIGGER ALL;
+ALTER TABLE restaurante_usuario_responsavel ENABLE TRIGGER ALL;
