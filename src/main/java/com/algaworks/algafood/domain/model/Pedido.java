@@ -31,22 +31,18 @@ public class Pedido {
     @Column(nullable = false)
     private BigDecimal valorTotal;
 
-    @JsonIgnore
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "timestamp(0)")
     private OffsetDateTime dataCriacao;
 
-    @JsonIgnore
     @CreationTimestamp
     @Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataConfirmacao;
 
-    @JsonIgnore
     @CreationTimestamp
     @Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataCancelamento;
 
-    @JsonIgnore
     @CreationTimestamp
     @Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataEntrega;
@@ -63,7 +59,6 @@ public class Pedido {
     @JoinColumn(name = "usuario_cliente_id", nullable = false)
     private Usuario cliente;
 
-    @JsonIgnore
     @Embedded
     private Endereco enderecoEntrega;
 

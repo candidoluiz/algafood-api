@@ -93,6 +93,9 @@ insert into usuario (nome, email, senha, data_cadastro) values
 insert into grupo (nome) values ('Gerente'), ('Vendedor'), ('Secretária'), ('Cadastrador');
 insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 1), (2, 2), (3, 1);
 
+insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
+
+
 
 --acaba aqui
 

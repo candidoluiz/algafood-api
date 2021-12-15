@@ -22,16 +22,7 @@ import java.util.List;
 public class GrupoPermissaoController {
 
     @Autowired
-    private GrupoRepository grupoRepository;
-
-    @Autowired
     private CadastroGrupoService cadastroGrupo;
-
-    @Autowired
-    private GrupoModelAssembler grupoModelAssembler;
-
-    @Autowired
-    private GrupoInputDisassembler grupoInputDisassembler;
 
     @Autowired
     private PermissaoModelAssembler permissaoModelAssembler;
