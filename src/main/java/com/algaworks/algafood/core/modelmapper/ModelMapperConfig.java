@@ -24,6 +24,7 @@ public class ModelMapperConfig {
                 (enderecoModelDest, value) -> enderecoModelDest.getCidade().setEstado(value));
         // ***********************************
 
+        //TODO não pegar o id do item pedido
         modelMapper.createTypeMap(ItemPedidoInput.class, ItemPedido.class)
                 .addMappings(mapper -> mapper.skip(ItemPedido::setId));
 
