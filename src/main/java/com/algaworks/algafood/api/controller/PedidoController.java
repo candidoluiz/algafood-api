@@ -1,18 +1,18 @@
 package com.algaworks.algafood.api.controller;
 
 
-import com.algaworks.algafood.api.assembler.CidadeInputDisassembler;
-import com.algaworks.algafood.api.assembler.CidadeModelAssembler;
-import com.algaworks.algafood.api.assembler.PedidoModelAssembler;
-import com.algaworks.algafood.api.assembler.PedidoResumoModelAssembler;
+import com.algaworks.algafood.api.assembler.*;
 import com.algaworks.algafood.api.model.CidadeModel;
 import com.algaworks.algafood.api.model.PedidoModel;
 import com.algaworks.algafood.api.model.PedidoResumoModel;
 import com.algaworks.algafood.api.model.input.CidadeInput;
+import com.algaworks.algafood.api.model.input.PedidoInput;
+import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.EstadoNaoEncontradoException;
 import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Cidade;
 import com.algaworks.algafood.domain.model.Pedido;
+import com.algaworks.algafood.domain.model.Usuario;
 import com.algaworks.algafood.domain.repository.CidadeRepository;
 import com.algaworks.algafood.domain.repository.PedidoRepository;
 import com.algaworks.algafood.domain.service.CadastroCidadeService;
@@ -40,6 +40,9 @@ public class PedidoController {
     @Autowired
     private PedidoResumoModelAssembler pedidoResumoModelAssembler;
 
+    @Autowired
+    private PedidoInputDisassembler pedidoInputDisassembler;
+
     @GetMapping
     public List<PedidoResumoModel> listar(){
         List<Pedido> todosPedidos = pedidoRepository.findAll();
@@ -50,6 +53,24 @@ public class PedidoController {
     public PedidoModel buscar(@PathVariable Long pedidoId){
         Pedido pedido = emissaoPedidoService.buscarOuFalhar(pedidoId);
         return pedidoModelAssembler.toModel(pedido);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public PedidoModel adicionar(@Valid @RequestBody PedidoInput pedidoInput){
+        try {
+            Pedido novoPedido = pedidoInputDisassembler.toDomainObject(pedidoInput);
+
+            // TODO pegar usuario autenticado
+            novoPedido.setCliente(new Usuario());
+            novoPedido.getCliente().setId(1L);
+
+            novoPedido = emissaoPedidoService.emitir(novoPedido);
+
+            return pedidoModelAssembler.toModel(novoPedido);
+        }catch (EntidadeNaoEncontradaException e){
+            throw new NegocioException(e.getMessage(), e);
+        }
     }
 
 }

@@ -35,16 +35,16 @@ public class Pedido {
     @Column(nullable = false, columnDefinition = "timestamp(0)")
     private OffsetDateTime dataCriacao;
 
-    @CreationTimestamp
-    @Column(columnDefinition = "timestamp(0)")
+    //@CreationTimestamp
+    //@Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataConfirmacao;
 
-    @CreationTimestamp
-    @Column(columnDefinition = "timestamp(0)")
+    //@CreationTimestamp
+    //@Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataCancelamento;
 
-    @CreationTimestamp
-    @Column(columnDefinition = "timestamp(0)")
+    //@CreationTimestamp
+    //@Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataEntrega;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -65,20 +65,14 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private StatusPedido status = StatusPedido.CRIADO;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
 
     public void calcularValorTotal(){
+        getItens().forEach(ItemPedido::calcularPrecoTotal);
         this.subtotal = getItens().stream()
                 .map(item -> item.getPrecoTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    public void definirFrete(){
-        setTaxaFrete(getRestaurante().getTaxaFrete());
-    }
-
-    public void atribuirPedidoAosItens(){
-        getItens().forEach(item->item.setPedido(this));
+        this.valorTotal = this.subtotal.add(this.taxaFrete);
     }
 }
