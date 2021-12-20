@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -22,6 +23,8 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String codigo;
 
     @Column(nullable = false)
     private BigDecimal subtotal;
@@ -36,16 +39,10 @@ public class Pedido {
     @Column(nullable = false, columnDefinition = "timestamp(0)")
     private OffsetDateTime dataCriacao;
 
-    //@CreationTimestamp
-    //@Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataConfirmacao;
 
-    //@CreationTimestamp
-    //@Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataCancelamento;
 
-    //@CreationTimestamp
-    //@Column(columnDefinition = "timestamp(0)")
     private OffsetDateTime dataEntrega;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -95,10 +92,15 @@ public class Pedido {
     private void setStatus(StatusPedido novoStatus){
         if (getStatus().naoPodeAlterarPara(novoStatus)){
             throw new NegocioException(
-                    String.format("Status do pedido %d não pode alterado de %s para %s",
-                    getId(),getStatus().getDescricao(),novoStatus.getDescricao()));
+                    String.format("Status do pedido %s não pode alterado de %s para %s",
+                    getCodigo(),getStatus().getDescricao(),novoStatus.getDescricao()));
         }
 
         this.status = novoStatus;
+    }
+
+    @PrePersist
+    private void gerarCodigo(){
+        setCodigo(UUID.randomUUID().toString());
     }
 }
