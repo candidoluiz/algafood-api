@@ -22,19 +22,25 @@ public class VendaQueryServiceImpl implements VendaQueryService {
     private EntityManager manager;
 
     @Override
-    public List<VendaDiaria> consultaVendasDiarias(VendaDiariaFilter filtro) {
+    public List<VendaDiaria> consultaVendasDiarias(VendaDiariaFilter filtro, String timeOffSet) {
        var builder = manager.getCriteriaBuilder();
        var query = builder.createQuery(VendaDiaria.class);
        var root = query.from(Pedido.class);
 
         var predicates = new ArrayList<Predicate>();
 
-       var functionDateDataCriacao = builder.function("to_char",Date.class, root.get("dataCriacao"), builder.literal("yyyy-MM-dd"));
+        var functionConvertDataCriacao = builder.function("timezone", Date.class, builder.literal(timeOffSet), root.get("dataCriacao")).as(Date.class);
+
+       var functionDateDataCriacao = builder.function("to_char",String.class, functionConvertDataCriacao, builder.literal("yyyy-MM-dd")).as(String.class);
 
        var selection = builder.construct(VendaDiaria.class,
                functionDateDataCriacao,
                builder.count(root.get("id")),
                builder.sum(root.get("valorTotal")));
+
+//        query.multiselect(functionDateDataCriacao.alias("data"),
+//                builder.count(root.get("id")),
+//                builder.sum(root.get("valorTotal")));
 
        if (filtro.getRestauranteId() != null){
            predicates.add(builder.equal(root.get("restaurante"), filtro.getRestauranteId()));
