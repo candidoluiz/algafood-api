@@ -13,6 +13,7 @@ ALTER TABLE usuario_grupo DISABLE TRIGGER ALL;
 ALTER TABLE restaurante_usuario_responsavel DISABLE TRIGGER ALL;
 ALTER TABLE pedido DISABLE TRIGGER ALL;
 ALTER TABLE item_pedido DISABLE TRIGGER ALL;
+ALTER TABLE foto_produto DISABLE TRIGGER ALL;
 
 delete from cidade;
 delete from cozinha;
@@ -29,6 +30,7 @@ delete from usuario_grupo;
 delete from restaurante_usuario_responsavel;
 delete from pedido;
 delete from item_pedido;
+delete from foto_produto;
 
 
 ALTER SEQUENCE cidade_id_seq RESTART WITH 1;
@@ -173,3 +175,4 @@ ALTER TABLE usuario_grupo ENABLE TRIGGER ALL;
 ALTER TABLE restaurante_usuario_responsavel ENABLE TRIGGER ALL;
 ALTER TABLE pedido ENABLE TRIGGER ALL;
 ALTER TABLE item_pedido ENABLE TRIGGER ALL;
+ALTER TABLE foto_produto ENABLE TRIGGER ALL;
