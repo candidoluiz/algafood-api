@@ -81,11 +81,11 @@ public class RestauranteProdutoFotoController {
 
             verificarCompatibilidadeMediaType(mediaTypeFoto, mediaTypesAceitas);
 
-            InputStream inputStream = fotoStorage.recuperar(fotoProduto.getNomeArquivo());
+            FotoStorageService.FotoRecuperada fotoRecuperada = fotoStorage.recuperar(fotoProduto.getNomeArquivo());
 
             return ResponseEntity.ok()
                     .contentType(mediaTypeFoto)
-                    .body(new InputStreamResource(inputStream));
+                    .body(new InputStreamResource(fotoRecuperada.getInputStream()));
         }catch (EntidadeNaoEncontradaException e){
             return ResponseEntity.notFound().build();
         }
