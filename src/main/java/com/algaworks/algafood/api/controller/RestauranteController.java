@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@CrossOrigin(maxAge = 10)
 @RestController
 @RequestMapping("/restaurantes")
 public class RestauranteController {
