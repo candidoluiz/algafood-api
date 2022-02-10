@@ -28,6 +28,7 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
     @PersistenceContext
     private EntityManager manager;
 
+    //Todo Aula 5.19
     @Autowired @Lazy
     private RestauranteRepository restauranteRepository;
 

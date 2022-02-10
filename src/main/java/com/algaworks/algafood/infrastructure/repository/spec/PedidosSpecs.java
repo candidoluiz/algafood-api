@@ -37,6 +37,8 @@ public class PedidosSpecs {
                 predicates.add(builder.lessThanOrEqualTo(root.get("dataCriacao"),filtro.getDataCriacaoFim()));
             }
 
+            query.orderBy(builder.asc(root.get("restaurante").get("id")));
+
 
             return builder.and(predicates.toArray(new Predicate[0]));
         };
