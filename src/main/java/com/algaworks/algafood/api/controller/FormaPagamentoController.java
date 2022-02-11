@@ -35,7 +35,9 @@ public class FormaPagamentoController {
 
     @GetMapping
     public ResponseEntity<List<FormaPagamentoModel>> listar(){
+
         List<FormaPagamento> todosFormaPagamentos = formaPagamentoRepository.findAll();
+        
         List<FormaPagamentoModel> formasPagamentoModel= formaPagamentoModelAssembler.toCollectionModel(todosFormaPagamentos);
         return ResponseEntity.ok()
                 //.cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
