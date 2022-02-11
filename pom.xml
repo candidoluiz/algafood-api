@@ -13,9 +13,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>algafood-api</name>
     <description>Api de delivery de comida</description>
+
     <properties>
         <java.version>11</java.version>
+        <springfox.version>3.0.0</springfox.version>
+        <guava.version>31.0.1-jre</guava.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -48,8 +52,13 @@
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
         <dependency>
