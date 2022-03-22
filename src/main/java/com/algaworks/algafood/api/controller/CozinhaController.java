@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Slf4j
+
 @RestController
 @RequestMapping("/cozinhas")
 public class CozinhaController {
@@ -40,7 +40,6 @@ public class CozinhaController {
 
     @GetMapping
     public Page<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pageable){
-        log.info("Consultando cozinhas...");
         Page<Cozinha> cozinhasPage = cozinhaRepository.findAll(pageable);
 
         List<CozinhaModel> cozinhasModel = cozinhaModelAssembler.toCollectionModel(cozinhasPage.getContent());
