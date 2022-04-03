@@ -18,11 +18,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("luiz")
                 .password(passwordEncoder().encode("123"))
-                .roles("ADMIN")
+                .roles(new String[]{"ADMIN"})
                 .and()
                 .withUser("joao")
                 .password(passwordEncoder().encode("123"))
-                .roles("ADMIN");
+                .roles(new String[]{"ADMIN"});
     }
 
     @Bean
