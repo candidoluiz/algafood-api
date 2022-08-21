@@ -76,6 +76,7 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
        security.checkTokenAccess("permitAll()")
+               .tokenKeyAccess("permitAll")
                .allowFormAuthenticationForClients();
     }
 
