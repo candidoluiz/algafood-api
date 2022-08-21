@@ -39,6 +39,9 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
+    @Autowired
+    private JwtKeyStoreProperties jwtKeyStoreProperties;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
        clients
@@ -91,9 +94,9 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
         var jwtAccessTokenConverter = new JwtAccessTokenConverter();
         //jwtAccessTokenConverter.setSigningKey("fade225f096f9138f98f29887fc1f10d");
 
-        var jksResource = new ClassPathResource("keystores/algafood.jks");
-        var keyStorePass = "123456";
-        var keyPairAlias = "algafood";
+        var jksResource = new ClassPathResource(jwtKeyStoreProperties.getPath());
+        var keyStorePass = jwtKeyStoreProperties.getPassword();
+        var keyPairAlias = jwtKeyStoreProperties.getKeypairAlias();
 
         var keyStoreKeyFactory = new KeyStoreKeyFactory(jksResource,keyStorePass.toCharArray());
         var keyPair = keyStoreKeyFactory.getKeyPair(keyPairAlias);
