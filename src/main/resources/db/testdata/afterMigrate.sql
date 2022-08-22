@@ -95,13 +95,13 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Esp
 insert into grupo (nome) values ('Gerente'), ('Vendedor'), ('Secretária'), ('Cadastrador');
 
 insert into usuario (nome, email, senha, data_cadastro) values
-('João da Silva', 'joao.ger@algafood.com', '123', timezone('utc', now())),
-('Maria Joaquina', 'maria.vnd@algafood.com', '123', timezone('utc', now())),
-('José Souza', 'jose.aux@algafood.com', '123', timezone('utc', now())),
-('Sebastião Martins', 'sebastiao.cad@algafood.com', '123', timezone('utc', now())),
-('Manoel Lima', 'manoel.loja@gmail.com', '123', timezone('utc', now())),
-('Débora Mendonça', 'luiz.fernando360+debora@gmail.com', '123', timezone('utc', now())),
-('Carlos Lima', 'luiz.fernando360+carlos@gmail.com', '123', timezone('utc', now()));
+('João da Silva', 'joao.ger@algafood.com', '$2a$12$LYwcgZqNVBvPchIwwRZNzO0lxqu8KnhST.wdTQW4IjBx3r7h8r8m2', timezone('utc', now())),
+('Maria Joaquina', 'maria.vnd@algafood.com', '$2a$12$LYwcgZqNVBvPchIwwRZNzO0lxqu8KnhST.wdTQW4IjBx3r7h8r8m2', timezone('utc', now())),
+('José Souza', 'jose.aux@algafood.com', '$2a$12$LYwcgZqNVBvPchIwwRZNzO0lxqu8KnhST.wdTQW4IjBx3r7h8r8m2', timezone('utc', now())),
+('Sebastião Martins', 'sebastiao.cad@algafood.com', '$2a$12$LYwcgZqNVBvPchIwwRZNzO0lxqu8KnhST.wdTQW4IjBx3r7h8r8m2', timezone('utc', now())),
+('Manoel Lima', 'manoel.loja@gmail.com', '$2a$12$LYwcgZqNVBvPchIwwRZNzO0lxqu8KnhST.wdTQW4IjBx3r7h8r8m2', timezone('utc', now())),
+('Débora Mendonça', 'luiz.fernando360+debora@gmail.com', '$2a$12$LYwcgZqNVBvPchIwwRZNzO0lxqu8KnhST.wdTQW4IjBx3r7h8r8m2', timezone('utc', now())),
+('Carlos Lima', 'luiz.fernando360+carlos@gmail.com', '$2a$12$LYwcgZqNVBvPchIwwRZNzO0lxqu8KnhST.wdTQW4IjBx3r7h8r8m2', timezone('utc', now()));
 
 insert into grupo (nome) values ('Gerente'), ('Vendedor'), ('Secretária'), ('Cadastrador');
 insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 1), (2, 2), (3, 1);
