@@ -40,7 +40,6 @@ public class CozinhaController {
     @CheckSecurity.Cozinhas.PodeConsultar
     @GetMapping
     public Page<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pageable){
-        //System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         Page<Cozinha> cozinhasPage = cozinhaRepository.findAll(pageable);
 
         List<CozinhaModel> cozinhasModel = cozinhaModelAssembler.toCollectionModel(cozinhasPage.getContent());
