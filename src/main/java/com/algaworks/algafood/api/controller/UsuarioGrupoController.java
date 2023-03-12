@@ -5,6 +5,7 @@ import com.algaworks.algafood.api.assembler.GrupoModelAssembler;
 import com.algaworks.algafood.api.assembler.PermissaoModelAssembler;
 import com.algaworks.algafood.api.model.GrupoModel;
 import com.algaworks.algafood.api.model.PermissaoModel;
+import com.algaworks.algafood.core.security.CheckSecurity;
 import com.algaworks.algafood.domain.model.Grupo;
 import com.algaworks.algafood.domain.model.Permissao;
 import com.algaworks.algafood.domain.model.Usuario;
@@ -30,19 +31,21 @@ public class UsuarioGrupoController {
     @Autowired
     private CadastroGrupoService cadastroGrupo;
 
-
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     @GetMapping
     public List<GrupoModel> listar(@PathVariable Long usuarioId){
         Usuario usuario = cadastroUsuarioService.buscarOuFalhar(usuarioId);
         return grupoModelAssembler.toCollectionModel(usuario.getGrupos());
     }
 
+    @CheckSecurity.UsuariosGruposPermissoes.PodeEditar
     @DeleteMapping("/{grupoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void desassociar(@PathVariable Long usuarioId, @PathVariable Long grupoId) {
         cadastroUsuarioService.desassociarGrupo(usuarioId, grupoId);
     }
 
+    @CheckSecurity.UsuariosGruposPermissoes.PodeEditar
     @PutMapping("/{grupoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void associar(@PathVariable Long usuarioId, @PathVariable Long grupoId) {
