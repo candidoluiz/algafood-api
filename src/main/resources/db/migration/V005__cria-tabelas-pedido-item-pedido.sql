@@ -37,7 +37,7 @@ CREATE TABLE item_pedido
      quantidade     INT NOT NULL,
      preco_unitario NUMERIC(10, 2) NOT NULL,
      preco_total    NUMERIC(10, 2) NOT NULL,
-     observacao     VARCHAR NOT NULL,
+     observacao     VARCHAR NULL,
      pedido_id      BIGINT NOT NULL CONSTRAINT fk_item_pedido_pedido REFERENCES pedido,
      produto_id     BIGINT NOT NULL CONSTRAINT fk_item_pedido_produto REFERENCES produto
   );
