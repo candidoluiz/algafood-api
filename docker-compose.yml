@@ -19,9 +19,7 @@ services:
         image: algafood-api
         command: ["/wait-for-it.sh","algafood-postgres:5433", "-t", "30", "--", "java","-jar","api.jar" ]
         environment:
-            DB_HOST: algafood-postgres
-        ports:
-            - "8080:8080"
+            DB_HOST: algafood-postgres       
         networks:
             - algafood-network
         depends_on:
