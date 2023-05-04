@@ -1,3 +1,25 @@
+
+begin work;
+
+lock table
+cidade,
+cozinha,
+estado,
+forma_pagamento,
+grupo,
+grupo_permissao,
+permissao,
+produto,
+restaurante,
+restaurante_forma_pagamento,
+usuario,
+usuario_grupo,
+restaurante_usuario_responsavel,
+pedido,
+item_pedido,
+foto_produto,
+oauth_client_details;
+
 ALTER TABLE cidade DISABLE TRIGGER ALL;
 ALTER TABLE cozinha DISABLE TRIGGER ALL;
 ALTER TABLE estado DISABLE TRIGGER ALL;
@@ -239,3 +261,5 @@ ALTER TABLE restaurante_usuario_responsavel ENABLE TRIGGER ALL;
 ALTER TABLE pedido ENABLE TRIGGER ALL;
 ALTER TABLE item_pedido ENABLE TRIGGER ALL;
 ALTER TABLE foto_produto ENABLE TRIGGER ALL;
+
+commit work;
